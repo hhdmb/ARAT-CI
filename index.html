@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="acceuil.css">
+    <link rel="icon" href="logo arat ci.jpg"/>
+    <title>Document</title>
+</head>
+
+<body>
+   <header>
+  <div class="logo">
+    <a href="index.html"><h1>ARAT-CI</h1></a>
+  </div>
+
+  <div class="burger" id="burger" aria-label="Menu" aria-expanded="false" role="button" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav class="line" id="navLinks" aria-hidden="true">
+    <ul>
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#propos">A propos</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="formation.html">Formations</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div id="overlay"></div>
+</header>
+
+<script>
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  const overlay = document.getElementById('overlay');
+
+  function openMenu() {
+    navLinks.classList.add('active');
+    burger.classList.add('active');
+    overlay.classList.add('active');
+    burger.setAttribute('aria-expanded', 'true');
+    navLinks.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeMenu() {
+    navLinks.classList.remove('active');
+    burger.classList.remove('active');
+    overlay.classList.remove('active');
+    burger.setAttribute('aria-expanded', 'false');
+    navLinks.setAttribute('aria-hidden', 'true');
+  }
+
+  function toggleMenu() {
+    if(navLinks.classList.contains('active')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+
+  burger.addEventListener('click', toggleMenu);
+  burger.addEventListener('keydown', e => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMenu();
+    }
+  });
+
+  overlay.addEventListener('click', closeMenu);
+
+  // Fermer menu au clic sur un lien
+  document.querySelectorAll('#navLinks a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Fermeture au ESC
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && navLinks.classList.contains('active')) {
+      closeMenu();
+    }
+  });
+</script>
+
+    <section class="accueil" id="acceuil">
+        <div class="overlay">
+          <h2 translate="no">Artisan Agro-Transformation <span class="vert">CI</span></h2>
+          <h3>Obtenez votre  certificat reconnu et crédible  dans le secteur de l'Industrie Agroalimentaire.</h3>
+           <a href=""><button>Découvrez nous</button></a>
+        </div>
+      </section>
+      <section class="a-propos" id="propos">
+        <div class="contenu">
+          <div class="logo-apropos">
+            <img src="logo arat ci.jpg" alt="Logo">
+          </div>
+          <div class="texte-apropos">
+            <h3>À propos de nous</h3>
+            <p>Artisan Agro-Transformation CI est une entreprise ivoirienne specialisée dans la transformation agroalimentaire et qui a pour mission de promouvoir et de soutenir la transformation agroalimentaire en Côte d'Ivoire. Elle se concentre sur la formation, le conseil, l'accompagnement, la professionnalisation et le renforcement des capacités des acteurs locaux dans le domaine de l'agro-industrie. L'objectif est de rendre les processus de transformation plus efficaces, d'améliorer la qualité des produits et de créer des opportunités économiques pour les petites et moyennes entreprises locales. L'entreprise cherche ainsi à contribuer au développement du secteur agroalimentaire en Côte d'Ivoire et à renforcer la compétitivité des acteurs nationaux sur le marché.</p>
+          </div>
+        </div>
+      </section>
+      <section class="services" id="services">
+        <h2>Nos Services</h2>
+        <div class="services-container">
+          <div class="service-box">
+            <i class="fas fa-user-tie"></i>
+            <p>Formation Professionnelle Superviseurs QHSE opérationnels et Agent QHSE</p>
+          </div>
+          <div class="service-box">
+            <i class="fas fa-certificate"></i>
+            <p>Certificat d'Aptitude à la Mise en Place de la Méthode HACCP.            </p>
+          </div>
+          <div class="service-box">
+            <i class="fas fa-hard-hat"></i>
+            <p>Formation Professionnelle Responsable Qualité et Sécurité Alimentaire
+            </p>
+          </div>
+
+          <div class="service-box">
+            <i class="fas fa-tools"></i>
+            <p>Installation et Maintenance Industrielle de Machines</p>
+          </div>
+          <div class="service-box">
+            <i class="fas fa-store"></i>
+            <p>Vente de Machines de Transformation Agroalimentaire
+            </p>
+          </div>
+          <div class="service-box">
+            <i class="fas fa-search"></i>
+            <p>Recherche & Développement (R&D)</p>
+          </div>
+        </div>
+      </section>
+      <section class="formations" id="form">
+        <h2 class="titre">Nos Formations</h2>
+        <div class="formations-carousel-wrapper">
+          <button class="formation-btn left"><i class="fas fa-chevron-left"></i></button>
+          
+          <div class="formations-track">
+          <div class="formation-card">
+             <img src="choco.jpg" alt="Formation" class="card-img">
+  <div class="card-body">
+    <h2 class="card-title">Formation Technique et Certifiante en Chocolaterie Artisanale Professionnelle </h2>
+    <p class="card-description">
+     Formation sur la transformation artisanale du cacao en chocolat de qualité, 
+     alliant tradition et techniques professionnelles.
+    </p>
+    <div class="card-info">
+      <span class="duration">⏱️ 2 Mois</span>
+      <span class="price">💶 300 000 FCFA</span>
+    </div>
+ <a href="formation.html" class="card-button">En savoir plus</a>
+  </div>
+
+
+            </div> 
+          <div class="formation-card">
+<img src="lait1.jpg" alt="Formation" class="card-img">
+  <div class="card-body">
+    <h2 class="card-title">Formation Technique et Certifiante en Yaourterie Artisanale Professionnelle </h2>
+    <p class="card-description">
+  Formation à la fabrication artisanale et pro de yaourts : techniques, hygiène, conservation et conditionnement.
+    </p>
+    <div class="card-info">
+      <span class="duration">⏱️ 1 Mois</span>
+      <span class="price">💶 100 000 FCFA</span>
+    </div>
+    <a href="formation.html" class="card-button">En savoir plus</a>
+  </div>
+            </div> 
+
+
+            <div class="formation-card">
+              <img src="char.jpg" alt="Formation" class="card-img">
+  <div class="card-body">
+    <h2 class="card-title">Formation Technique et Certifiante en Charcuterie Artisanale Professionnelle</h2>
+    <p class="card-description">
+   Formation pratique en charcuterie artisanale : fabrication de saucisses et saucissons, techniques, assaisonnement,  et conservation.
+    </p>
+    <div class="card-info">
+      <span class="duration">⏱️ 3 Mois</span>
+      <span class="price">💶 350 000 FCFA</span>
+    </div>
+    <a href="formation.html" class="card-button">En savoir plus</a>
+  </div>
+            </div>
+
+
+            <div class="formation-card">
+              <img src="confi.jpg" alt="Formation" class="card-img">
+  <div class="card-body">
+    <h2 class="card-title">Formation Technique et Certifiante en Confiserie Artisanale Professionnelle</h2>
+    <p class="card-description">
+   Formation en confiserie artisanale : fabrication de confitures naturelles et bonbons au sucre tiré, entre tradition et technique.
+    </p>
+    <div class="card-info">
+      <span class="duration">⏱️ 1 Mois</span>
+      <span class="price">💶 100 000 FCFA</span>
+    </div>
+  <a href="formation.html" class="card-button">En savoir plus</a>
+  </div>
+            </div>
+
+            <div class="formation-card">
+             <img src="from.jpg" alt="Formation" class="card-img">
+  <div class="card-body">
+    <h2 class="card-title">Formation Technique et Certifiante en Fromagerie Tropicale </h2>
+    <p class="card-description">
+     Formation en fromagerie tropicale : fabrication artisanale de fromages adaptés au lait local et au climat africain.
+    </p>
+    <div class="card-info">
+      <span class="duration">⏱️ 3 Mois</span>
+      <span class="price">💶 350 000 FCFA</span>
+    </div>
+   <a href="formation.html" class="card-button">En savoir plus</a>
+  </div>
+            </div>
+
+            <div class="formation-card">
+             <img src="cosme.jpeg" alt="Formation" class="card-img">
+  <div class="card-body">
+    <h2 class="card-title">Certificat d’Aptitude en Cosmétologie Industrielle </h2>
+    <p class="card-description">
+Formation certifiante en cosmétique : formulation, production et conditionnement de produits selon normes industrielles et artisanales.
+    </p>
+    <div class="card-info">
+      <span class="duration">⏱️ 3 Mois</span>
+      <span class="price">💶 300 000 FCFA</span>
+    </div>
+    <a href="formation.html" class="card-button">En savoir plus</a>
+  </div>
+            </div>
+
+
+        
+          </div>
+      
+          <button class="formation-btn right"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      
+        <a href="formation.html" class="voir-plus">Voir plus</a>
+      </section>
+      
+    
+      
+      
+
+        <script>
+
+  
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  document.querySelectorAll('section').forEach(sec => {
+    observer.observe(sec);
+  });
+
+
+
+  const track = document.querySelector(".formations-track");
+  const cards = document.querySelectorAll(".formation-card");
+  const btnLeft = document.querySelector(".formation-btn.left");
+  const btnRight = document.querySelector(".formation-btn.right");
+
+  let index = 0;
+  let isTransitioning = false;
+
+  const visibleCount = () => window.innerWidth <= 753 ? 1 : 4;
+  const cardWidth = () => cards[0].offsetWidth + 20;
+
+  // Clone les premières et dernières cartes
+  const cloneCount = visibleCount();
+  const totalCards = cards.length;
+
+  for (let i = 0; i < cloneCount; i++) {
+    const firstClone = cards[i].cloneNode(true);
+    const lastClone = cards[totalCards - 1 - i].cloneNode(true);
+    track.appendChild(firstClone);
+    track.insertBefore(lastClone, track.firstChild);
+  }
+
+  let allCards = document.querySelectorAll(".formation-card");
+  index = cloneCount;
+  track.style.transform = `translateX(-${index * cardWidth()}px)`;
+
+  function updateCarousel() {
+    track.style.transition = "transform 0.5s ease-in-out";
+    track.style.transform = `translateX(-${index * cardWidth()}px)`;
+  }
+
+  function next() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    index++;
+    updateCarousel();
+  }
+
+  function prev() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    index--;
+    updateCarousel();
+  }
+
+  btnRight.addEventListener("click", next);
+  btnLeft.addEventListener("click", prev);
+
+  track.addEventListener("transitionend", () => {
+    const total = allCards.length;
+    if (index >= total - cloneCount) {
+      index = cloneCount;
+      track.style.transition = "none";
+      track.style.transform = `translateX(-${index * cardWidth()}px)`;
+    } else if (index < cloneCount) {
+      index = total - cloneCount * 2;
+      track.style.transition = "none";
+      track.style.transform = `translateX(-${index * cardWidth()}px)`;
+    }
+    isTransitioning = false;
+  });
+
+  // Auto défilement
+  setInterval(() => {
+    next();
+  }, 10000);
+</script>
+<!-- Insère ce code dans <body>, avant le footer par exemple -->
+<section class="contact-section" id="contact">
+  <div class="contact-links">
+  <a href="#" class="contact-icon whatsapp" title="Contacter via WhatsApp">
+    <i class="fab fa-whatsapp"></i> WhatsApp
+  </a>
+  <a href="#" class="contact-icon facebook" title="Contacter via Facebook">
+    <i class="fab fa-facebook-messenger"></i> Facebook
+  </a>
+</div>
+
+  <h2>Nous Contacter</h2>
+  <form id="contactForm" class="contact-form">
+    <div class="form-group">
+      <input type="text" name="name" placeholder="Votre nom" required />
+    </div>
+    <div class="form-group">
+      <input type="email" name="email" placeholder="Votre email" required />
+    </div>
+    <div class="form-group">
+      <input type="text" name="subject" placeholder="Objet du message" required />
+    </div>
+    <div class="form-group">
+      <textarea name="message" rows="6" placeholder="Votre message" required></textarea>
+    </div>
+    <button type="submit" class="send-btn">Envoyer</button>
+    <p id="formMessage" class="form-message"></p>
+  </form>
+</section>
+
+
+
+
+
+
+<footer>
+  <div class="footer-wrapper">
+
+    <div class="footer-section footer-links">
+      <h3>Liens Rapides</h3>
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#propos">À propos</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="formation.html">Formations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+ <div class="footer-section footer-info">
+  <h3>Informations</h3>
+  <p><strong>Siège :</strong> Yopougon Ananeraie Cité Mamie Adjoua</p>
+  <p><strong>Partenaire Académique :</strong></p>
+  <div class="partner-container">
+    <p>
+      Institution Universitaire Technologique Eudiste d'Afrique (IUTEA) / Université Catholique Eudiste d'Afrique
+    </p>
+    <div class="partner-logo">
+      <!-- Ici tu placeras l'image du logo -->
+      <img src="iue.png" alt="Logo Partenaire Académique" />
+    </div>
+  </div>
+  <p><strong>Lieu des Formations :</strong> Université Catholique Eudiste d'Afrique IUTEA située à Yopougon Carrefour Assonvon derrière l'hôtel Assonvon.</p>
+</div>
+
+
+    <div class="footer-section footer-social">
+      <h3>Suivez-nous</h3>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 ARAT CI / L'Artisan Agro-Transformation CI</p>
+    <p>Réalisé par Hassan Doumbia - <a href="#" target="_blank" rel="noopener noreferrer">Mon Portfolio</a></p>
+  </div>
+</footer>
+
+<!-- N'oublie pas d'inclure FontAwesome pour les icônes -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+   
+</body>
+</html>
