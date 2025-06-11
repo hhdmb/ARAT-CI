@@ -90,12 +90,13 @@
 </script>
 
 <nav class="formations-menu" aria-label="Menu des formations">
-  <button class="cat-toggle" aria-label="Afficher les catégories">
+  <button class="cat-toggle" aria-label="Afficher les catégories" title="Afficher les catégories">
     <!-- Icône catégorie (3 barres) -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="24" height="24" fill="currentColor">
-      <path d="M264.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 149.8C37.4 145.8 32 137.3 32 128s5.4-17.9 13.9-21.8L264.5 5.2zM476.9 209.6l53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 277.8C37.4 273.8 32 265.3 32 256s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0l152-70.2zm-152 198.2l152-70.2 53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 405.8C37.4 401.8 32 393.3 32 384s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0z"/>
-    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="24" height="24" fill="currentColor"><path d="M264.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 149.8C37.4 145.8 32 137.3 32 128s5.4-17.9 13.9-21.8L264.5 5.2zM476.9 209.6l53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 277.8C37.4 273.8 32 265.3 32 256s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0l152-70.2zm-152 198.2l152-70.2 53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 405.8C37.4 401.8 32 393.3 32 384s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0z"/></svg>
   </button>
+
+  <button class="scroll-btn scroll-left" aria-label="Défiler à gauche" title="Défiler à gauche">&larr;</button>
+
   <ul class="formations-list" tabindex="0">
     <li><a href="#formation1" title="Formation Chocolaterie Artisanale">Formation Chocolaterie Artisanale</a></li>
     <li><a href="#formation2" title="Formation Laiterie - Yaourt">Formation Laiterie - Yaourt</a></li>
@@ -107,61 +108,73 @@
     <li><a href="#formation8" title="Certificat en Brasserie Tropicale">Certificat en Brasserie Tropicale</a></li>
     <li><a href="#formation9" title="Certificat en Confiserie Générale">Certificat en Confiserie Générale</a></li>
   </ul>
+
+  <button class="scroll-btn scroll-right" aria-label="Défiler à droite" title="Défiler à droite">&rarr;</button>
 </nav>
 
 <script>
   const formationsList = document.querySelector('.formations-list');
+  const btnLeft = document.querySelector('.scroll-left');
+  const btnRight = document.querySelector('.scroll-right');
 
-  // Variables pour scroll auto
-  let autoScrollSpeed = 0.5; // px par frame (diminue pour plus lent)
-  let autoScrollRequest;
-
-  // Fonction scroll auto fluide
+  // Auto scroll (lent)
   function autoScroll() {
-    formationsList.scrollLeft += autoScrollSpeed;
-
-    // Reset scrollLeft pour boucle infinie
-    if (formationsList.scrollLeft >= (formationsList.scrollWidth - formationsList.clientWidth)) {
+    formationsList.scrollLeft += 1;
+    if (formationsList.scrollLeft >= formationsList.scrollWidth - formationsList.clientWidth) {
       formationsList.scrollLeft = 0;
     }
-
-    autoScrollRequest = requestAnimationFrame(autoScroll);
+    autoScroll.animationFrameId = requestAnimationFrame(autoScroll);
   }
+  autoScroll.animationFrameId = requestAnimationFrame(autoScroll);
 
-  // Démarre l'auto scroll
-  autoScrollRequest = requestAnimationFrame(autoScroll);
-
-  // Pause auto scroll au survol / focus
+  // Stop auto scroll au survol
   formationsList.addEventListener('mouseenter', () => {
-    cancelAnimationFrame(autoScrollRequest);
+    cancelAnimationFrame(autoScroll.animationFrameId);
   });
   formationsList.addEventListener('mouseleave', () => {
-    autoScrollRequest = requestAnimationFrame(autoScroll);
-  });
-  formationsList.addEventListener('focusin', () => {
-    cancelAnimationFrame(autoScrollRequest);
-  });
-  formationsList.addEventListener('focusout', () => {
-    autoScrollRequest = requestAnimationFrame(autoScroll);
+    autoScroll.animationFrameId = requestAnimationFrame(autoScroll);
   });
 
-  // Scroll horizontal au wheel (souris) + pause auto scroll temporaire
-  let wheelTimeout;
+  // Scroll avec molette souris (vertical pour horizontal)
+  let scrollTimeout;
   formationsList.addEventListener('wheel', (evt) => {
     if (evt.deltaY !== 0) {
       evt.preventDefault();
-      cancelAnimationFrame(autoScrollRequest);
+      cancelAnimationFrame(autoScroll.animationFrameId);
       formationsList.scrollBy({
         left: evt.deltaY < 0 ? -40 : 40,
         behavior: 'smooth'
       });
-      clearTimeout(wheelTimeout);
-      wheelTimeout = setTimeout(() => {
-        autoScrollRequest = requestAnimationFrame(autoScroll);
-      }, 2000);
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        autoScroll.animationFrameId = requestAnimationFrame(autoScroll);
+      }, 3000);
     }
   });
+
+  // Boutons scroll manuel
+  btnLeft.addEventListener('click', () => {
+    cancelAnimationFrame(autoScroll.animationFrameId);
+    formationsList.scrollBy({ left: -100, behavior: 'smooth' });
+    resetAutoScroll();
+  });
+
+  btnRight.addEventListener('click', () => {
+    cancelAnimationFrame(autoScroll.animationFrameId);
+    formationsList.scrollBy({ left: 100, behavior: 'smooth' });
+    resetAutoScroll();
+  });
+
+  // Redémarre l'auto scroll après 3 secondes sans interaction
+  let resetTimeout;
+  function resetAutoScroll() {
+    clearTimeout(resetTimeout);
+    resetTimeout = setTimeout(() => {
+      autoScroll.animationFrameId = requestAnimationFrame(autoScroll);
+    }, 3000);
+  }
 </script>
+
 
 
    <main>
