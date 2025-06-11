@@ -18,6 +18,7 @@
   top: 0;
   z-index: 9999;
   user-select: none;
+  overflow: hidden; /* cacher overflow vertical */
 }
 
 /* Bouton icône catégorie */
@@ -34,6 +35,7 @@
   justify-content: center;
   transition: transform 0.3s ease;
   user-select: none;
+  flex-shrink: 0;
 }
 .cat-toggle:hover {
   transform: rotate(90deg);
@@ -51,6 +53,11 @@
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  /* For keyboard focus outline */
+  outline-offset: 2px;
+  outline-color: var(--primary-color);
 }
 .formations-list::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
@@ -98,7 +105,6 @@
 /* === Responsive mobile - même look mais avec swipe tactile === */
 @media (max-width: 768px) {
   .formations-list {
-    /* même carrousel horizontal */
     -webkit-overflow-scrolling: touch;
   }
 }
