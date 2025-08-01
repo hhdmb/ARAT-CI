@@ -866,3 +866,83 @@ footer {
   background-color: #006fe0;
   transform: scale(1.05);
 }
+
+
+
+.video-shots-section {
+  background-color: #f2f2f2; /* gris clair */
+  padding: 60px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2em;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.video-thumbnail {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.video-thumbnail:hover {
+  transform: scale(1.02);
+}
+
+.video-thumbnail video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* Affiche les controls au survol */
+.video-thumbnail video::-webkit-media-controls {
+  display: none !important;
+}
+
+.video-thumbnail:hover video {
+  controls: true;
+}
+
+.video-thumbnail:hover video::part(media-controls) {
+  display: block !important;
+}
+
+/* Bouton galerie */
+.gallery-button {
+  margin-top: 40px;
+}
+
+.btn-gallery {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ccc; /* à modifier par toi */
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.btn-gallery:hover {
+  background-color: #aaa;
+}
+
