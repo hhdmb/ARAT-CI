@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="acceuil.css">
+    <link rel="icon" href="logo arat ci.jpg"/>
+    <link rel="stylesheet" href="gallerie.css">
+    <link rel="icon" href="/fav" type="image/x-icon">
+
+    <title>Document</title>
+    <meta name="google-site-verification" content="y12ZY0GBfXsxK_d3kBkHSTNnbUGqNE2ozeTGvWKWb2c" />
+</head>
+
+<body>
+   <header>
+  <div class="logo">
+    <a href="index.html"><h1>ARAT-CI</h1></a>
+  </div>
+
+  <div class="burger" id="burger" aria-label="Menu" aria-expanded="false" role="button" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav class="line" id="navLinks" aria-hidden="true">
+    <ul>
+      <li><a href="#acceuil">Accueil</a></li>
+      <li><a href="gallerie.html">Galerie</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="formation.html">Formations</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div id="overlay"></div>
+</header>
+
+<script>
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  const overlay = document.getElementById('overlay');
+
+  function openMenu() {
+    navLinks.classList.add('active');
+    burger.classList.add('active');
+    overlay.classList.add('active');
+    burger.setAttribute('aria-expanded', 'true');
+    navLinks.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeMenu() {
+    navLinks.classList.remove('active');
+    burger.classList.remove('active');
+    overlay.classList.remove('active');
+    burger.setAttribute('aria-expanded', 'false');
+    navLinks.setAttribute('aria-hidden', 'true');
+  }
+
+  function toggleMenu() {
+    if(navLinks.classList.contains('active')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+
+  burger.addEventListener('click', toggleMenu);
+  burger.addEventListener('keydown', e => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMenu();
+    }
+  });
+
+  overlay.addEventListener('click', closeMenu);
+
+  // Fermer menu au clic sur un lien
+  document.querySelectorAll('#navLinks a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Fermeture au ESC
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && navLinks.classList.contains('active')) {
+      closeMenu();
+    }
+  });
+</script>
+
+<main class="gallery-container">
+  <div class="image-grid">
+    <img src="CAR1.jpg" alt="Image 1" class="gallery-img" />
+    <img src="CAR2.jpg" alt="Image 2" class="gallery-img" />
+    <img src="CAR3.jpg" alt="Image 3" class="gallery-img" />
+    <img src="CAR4.jpg" alt="Image 4" class="gallery-img" />
+    <img src="CAR5.jpg" alt="Image 5" class="gallery-img" />
+    <img src="CAR7.jpg" alt="Image 6" class="gallery-img" />
+    <img src="ara1.jpg" alt="Image 7" class="gallery-img" />
+    <img src="ARA2.jpg" alt="Image 8" class="gallery-img" />
+    <img src="ARA3.jpg" alt="Image 9" class="gallery-img" />
+    <img src="ARA4.jpg" alt="Image 10" class="gallery-img" />
+    <img src="ARA5.jpg" alt="Image 11" class="gallery-img" />
+    <img src="ARA6.jpg" alt="Image 12" class="gallery-img" />
+    <img src="ARA7.jpg" alt="Image 13" class="gallery-img" />
+    <img src="ARA8.jpg" alt="Image 14" class="gallery-img" />
+    
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="close-btn">&times;</span>
+    <img src="" alt="Full View" class="lightbox-img" />
+    <div class="nav-arrows">
+      <span class="arrow prev">&#10094;</span>
+      <span class="arrow next">&#10095;</span>
+    </div>
+  </div>
+</main>
+<script>
+  const images = document.querySelectorAll(".gallery-img");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.querySelector(".lightbox-img");
+  const closeBtn = document.querySelector(".close-btn");
+  const prevBtn = document.querySelector(".prev");
+  const nextBtn = document.querySelector(".next");
+
+  let currentIndex = 0;
+
+  images.forEach((img, index) => {
+    img.addEventListener("click", () => {
+      currentIndex = index;
+      showImage();
+    });
+  });
+
+  function showImage() {
+    lightboxImg.src = images[currentIndex].src;
+    lightbox.style.display = "flex";
+  }
+
+  closeBtn.addEventListener("click", () => {
+    lightbox.style.display = "none";
+  });
+
+  prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage();
+  });
+
+  // Quitter lightbox avec la touche échapp
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      lightbox.style.display = "none";
+    }
+    if (e.key === "ArrowRight") {
+      nextBtn.click();
+    }
+    if (e.key === "ArrowLeft") {
+      prevBtn.click();
+    }
+  });
+</script>
+
+
+
+
+
+<footer>
+  <div class="footer-wrapper">
+
+    <div class="footer-section footer-links">
+      <h3>Liens Rapides</h3>
+      <ul>
+        <li><a href="#acceuil">Accueil</a></li>
+        <li><a href="gallerie.html">Galerie</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="formation.html">Formations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+ <div class="footer-section footer-info">
+  <h3>Informations</h3>
+  <p><strong>Siège :</strong> Yopougon Ananeraie Cité Mamie Adjoua</p>
+  <p><strong>Partenaire Académique :</strong></p>
+  <div class="partner-container">
+    <p>
+      Institution Universitaire Technologique Eudiste d'Afrique (IUTEA) / Université Catholique Eudiste d'Afrique
+    </p>
+    <div class="partner-logo">
+      <!-- Ici tu placeras l'image du logo -->
+      <img src="iue.png" alt="Logo Partenaire Académique" />
+    </div>
+  </div>
+  <p><strong>Lieu des Formations :</strong> Université Catholique Eudiste d'Afrique IUTEA située à Yopougon Carrefour Assonvon derrière l'hôtel Assonvon.</p>
+</div>
+
+
+    <div class="footer-section footer-social">
+      <h3>Suivez-nous</h3>
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 ARAT CI / L'Artisan Agro-Transformation CI</p>
+    <p>Réalisé par Hassan Doumbia - <a href="#" target="_blank" rel="noopener noreferrer">Mon Portfolio</a></p>
+  </div>
+</footer>
+
+<!-- N'oublie pas d'inclure FontAwesome pour les icônes -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <script src="car.js"></script>
+</body>
+</html>
