@@ -175,6 +175,77 @@
     </div>
   </div>
 </section>
+<script>
+  document.querySelectorAll('.video-thumbnail video').forEach(video => {
+    // Affiche les contrôles au survol
+    video.addEventListener('mouseenter', () => {
+      video.setAttribute('controls', true);
+    });
+
+    video.addEventListener('mouseleave', () => {
+      video.removeAttribute('controls');
+    });
+
+    // Lecture plein écran au clic avec le son
+    video.addEventListener('click', () => {
+      // Clone pour activer le son
+      const fullVideo = video.cloneNode(true);
+      fullVideo.muted = false;
+      fullVideo.controls = true;
+      fullVideo.autoplay = true;
+
+      // Créer un conteneur temporaire
+      const wrapper = document.createElement('div');
+      wrapper.style.position = 'fixed';
+      wrapper.style.top = 0;
+      wrapper.style.left = 0;
+      wrapper.style.width = '100vw';
+      wrapper.style.height = '100vh';
+      wrapper.style.zIndex = 9999;
+      wrapper.style.backgroundColor = 'black';
+      wrapper.style.display = 'flex';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.justifyContent = 'center';
+
+      fullVideo.style.maxWidth = '100%';
+      fullVideo.style.maxHeight = '100%';
+
+      wrapper.appendChild(fullVideo);
+      document.body.appendChild(wrapper);
+
+      // Demander le plein écran
+      if (fullVideo.requestFullscreen) {
+        fullVideo.requestFullscreen();
+      } else if (fullVideo.webkitRequestFullscreen) {
+        fullVideo.webkitRequestFullscreen();
+      } else if (fullVideo.msRequestFullscreen) {
+        fullVideo.msRequestFullscreen();
+      }
+
+      // Supprimer au sortir du plein écran
+      function removeWrapper() {
+        document.body.removeChild(wrapper);
+        document.removeEventListener('fullscreenchange', removeOnExit);
+        document.removeEventListener('webkitfullscreenchange', removeOnExit);
+        document.removeEventListener('msfullscreenchange', removeOnExit);
+      }
+
+      function removeOnExit() {
+        if (
+          !document.fullscreenElement &&
+          !document.webkitFullscreenElement &&
+          !document.msFullscreenElement
+        ) {
+          removeWrapper();
+        }
+      }
+
+      document.addEventListener('fullscreenchange', removeOnExit);
+      document.addEventListener('webkitfullscreenchange', removeOnExit);
+      document.addEventListener('msfullscreenchange', removeOnExit);
+    });
+  });
+</script>
 
     
       <section class="formations" id="form">
